@@ -9,12 +9,12 @@ const LoginPage = props => {
   return (
     <div
       className='
-        flex flex-row
+        flex flex-col md:flex-row
         items-center justify-center
-        bg-red-300
-        py-24
         space-y-8
-        space-x-8
+        min-h-screen
+        px-3 md:px-12
+        md:space-x-12
       '
     >
       <div>
@@ -25,7 +25,7 @@ const LoginPage = props => {
               'signup for star wars character wiki'
           }
         </h1>
-        <p className='text-xl max-w-prose mt-2'>
+        <p className='text-xl max-w-2xl mt-2'>
           Voluptate nisi quis sunt dolore non excepteur ut velit amet qui pariatur. Est do elit qui quis dolore quis. Amet tempor officia dolore quis dolore qui commodo labore.
         </p>
       </div>
@@ -39,7 +39,6 @@ const LoginPage = props => {
 }
 
 export async function getServerSideProps({ query, req, res, ...rest }) {
-  // console.log('get serverside props', req.headers.cookie)
   var header = req && req.headers && req.headers.cookie
   var uc = new Cookies(header)
   const { userToken } = uc.getAll()
