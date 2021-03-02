@@ -1,3 +1,4 @@
+import Header from 'Components/Header'
 import { MotionConfig } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import 'Styles/globals.css'
@@ -11,6 +12,7 @@ function MyApp({ Component, pageProps }) {
   }, [])
   return (
     <MotionConfig features={features}>
+      <Header />
       <Component {...pageProps} />
     </MotionConfig>
   )
