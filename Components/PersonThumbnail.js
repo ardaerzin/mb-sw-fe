@@ -23,9 +23,9 @@ const PeopleItem = ({ name, image, id }) => {
         </div>
       </div>
       <div
-        className='px-4 my-2'
+        className='px-2 md:px-4 my-2'
       >
-        <span className='font-bold text-lg'>
+        <span className='font-bold text-sm md:text-lg leading-none'>
           {name}
         </span>
       </div>

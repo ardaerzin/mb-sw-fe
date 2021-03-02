@@ -12,40 +12,14 @@ const Home = ({ people }) => {
         items-center justify-center
         max-w-screen-xl
         mx-auto
-        bg-red-300
-        py-24
+        py-24 sm:px-2 xl:px-0
         space-y-8
       '
     >
       <div
-        className='sticky z-50 top-0 w-full bg-white py-4 px-4 flex justify-between items-center'
-      >
-        <h1 className='text-4xl font-bold'>
-          Star Wars Char Wiki
-        </h1>
-        <div className='flex flex-row items-center relative z-0'>
-          <input
-            type='text'
-            placeholder='search here'
-            className='
-              border-0 border-b
-              text-lg
-              focus:outline-none focus:border-brand focus:ring-0
-            '
-          />
-          <div
-            className='w-10 h-10 p-1 rounded-full bg-purple-400 cursor-pointer flex justify-center items-center'
-          >
-            <BsFilterRight
-              className='text-gray-50 text-2xl cursor-pointer'
-            />
-          </div>
-        </div>
-      </div>
-      <div
         className='
           w-full
-          grid grid-cols-5 gap-4
+          grid grid-cols-2 sm:lg:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4
           max-w-6xl
           p-4
         '
