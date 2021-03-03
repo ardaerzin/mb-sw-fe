@@ -32,6 +32,7 @@ const ThumbnailBase = ({ type, id, children }) => {
       >
         <div
           className='
+            relative
             flex flex-col
             bg-white rounded-md shadow-md
             overflow-hidden

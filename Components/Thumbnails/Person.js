@@ -1,8 +1,12 @@
 import ThumbnailBase, { ThumbnailTextHolder, ThumbnailTitle } from './Base'
 import PropTypes from 'prop-types'
 import Image from 'next/image'
+import { AnimatePresence, m as motion } from 'framer-motion'
+import dynamic from 'next/dynamic'
 
-const PeopleItem = ({ name, image, id }) => {
+const CharacterLikeButton = dynamic(() => import('Components/Character/LikeButton'), { ssr: false })
+
+const PeopleItem = ({ name, image, id, likeAction, dislikeAction, liked = false }) => {
   return (
     <ThumbnailBase
       type='character'
@@ -19,7 +23,21 @@ const PeopleItem = ({ name, image, id }) => {
             layout='fill'
           />
         </div>
+        <div
+          className='absolute top-0 left-0 right-0 bottom-0'
+          style={{
+            background: 'linear-gradient(0deg, #ffffff44 30%, #00000088 100%)'
+          }}
+        />
       </div>
+      <AnimatePresence
+        exitBeforeEnter={true}
+      >
+        <CharacterLikeButton
+          id={id}
+          className='absolute top-2 right-2 z-10'
+        />
+      </AnimatePresence>
       <ThumbnailTextHolder>
         <ThumbnailTitle>
           {name}
