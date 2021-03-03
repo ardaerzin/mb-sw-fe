@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import ThumbnailBase, { ThumbnailTextHolder, ThumbnailTitle } from './Base'
 
 const VehicleItem = ({ name, model, id }) => {
-  console.log('vehicle', name, model)
   return (
     <ThumbnailBase
       type='vehicle'

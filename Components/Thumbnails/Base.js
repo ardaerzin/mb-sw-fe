@@ -1,3 +1,4 @@
+import { m as motion } from 'framer-motion'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 
@@ -16,9 +17,19 @@ export const ThumbnailTitle = (props) => (
 const ThumbnailBase = ({ type, id, children }) => {
   return (
     <Link
-      href={`/${type}/${encodeURIComponent(id)}`}
+      href={`/${type}/${id}`}
     >
-      <a>
+      <motion.a
+        layout
+        className='cursor-pointer'
+        variants={{
+          exit: { opacity: 0 },
+          enter: { opacity: 1 }
+        }}
+        transition={{
+          duration: 0.3
+        }}
+      >
         <div
           className='
             flex flex-col
@@ -26,14 +37,13 @@ const ThumbnailBase = ({ type, id, children }) => {
             overflow-hidden
             self-stretch
             h-full
-            justify-end
           '
         >
           {
             children
           }
         </div>
-      </a>
+      </motion.a>
     </Link>
   )
 }

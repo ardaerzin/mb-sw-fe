@@ -9,7 +9,7 @@ const PeopleItem = ({ name, image, id }) => {
       id={id}
     >
       <div
-        className='relative w-full'
+        className='relative w-full self-start'
       >
         <div
           className='relative aspect-w-1 aspect-h-1'
