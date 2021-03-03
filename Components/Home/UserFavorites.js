@@ -1,9 +1,10 @@
 import { useLocalStorage } from '@rehooks/local-storage';
-import PropTypes from 'prop-types'
-import { AnimateSharedLayout, m as motion } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 import PeopleItem from 'Components/Thumbnails/Person'
 import { useState } from 'react';
 import { FaHeart } from 'react-icons/fa'
+import { AiFillCloseCircle } from 'react-icons/ai'
+import PropTypes from 'prop-types'
 
 const UserFavorites = ({ people }) => {
   const [visible, setVisible] = useState(false)
@@ -27,7 +28,10 @@ const UserFavorites = ({ people }) => {
       '
       initial='initial'
       animate={visible ? 'visible' : 'initial'}
-      onClick={() => setVisible(!visible)}
+      onClick={() => {
+        if (visible) return
+        setVisible(true)
+      }}
       variants={{
         visible: {
           width: 'calc(100% - 2rem)',
@@ -60,9 +64,12 @@ const UserFavorites = ({ people }) => {
       {
         visible && (
           <div className='relative w-full h-full'>
-            <motion.span className='text-white text-2xl' layoutId='text' layout>
-              your favorite characters {favs.length}
-            </motion.span>
+            <div className='flex justify-between items-center'>
+              <motion.span className='text-white text-2xl' layoutId='text' layout>
+                your favorite characters {favs.length}
+              </motion.span>
+              <AiFillCloseCircle className='text-white text-2xl' onClick={() => setVisible(false)} />
+            </div>
             <div
               className='
                 w-full
