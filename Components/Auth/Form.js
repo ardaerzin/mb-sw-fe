@@ -15,8 +15,9 @@ const validations = {
 const ErrorLabel = (props) => (
   <span
     className='
-      text-sm font-sans font-medium
-    bg-red-500 text-white
+      text-xs font-sans font-medium
+      bg-red-500 text-white
+      p-1
     '
     {...props}
   />
@@ -78,7 +79,7 @@ const AuthFormBase = ({ switchState, switchTo, state, ...rest }) => {
         p-4
         space-y-2
         bg-white
-        rounded-md shadow-sm
+        rounded-md shadow-md
       '
       {...rest}
     >
