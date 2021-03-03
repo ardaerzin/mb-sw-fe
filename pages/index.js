@@ -5,6 +5,9 @@ import Cookies from 'universal-cookie'
 import { NextSeo } from 'next-seo'
 import { AnimateSharedLayout } from 'framer-motion'
 import useSearch from 'lib/hooks/useSearch'
+import dynamic from 'next/dynamic'
+
+const UserFavorites = dynamic(() => import('Components/Home/UserFavorites'), { ssr: false })
 
 const Home = (props) => {
   const { people, loading } = useSearch(props.people)
@@ -29,6 +32,7 @@ const Home = (props) => {
           site_name: 'StarWars Dex',
         }}
       />
+      <UserFavorites people={people} />
       {
         people.length > 0 ? (
           <>
