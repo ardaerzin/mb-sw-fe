@@ -1,8 +1,8 @@
-import PeopleItem from 'Components/PersonThumbnail.js'
 import { BsFilterRight } from 'react-icons/bs'
 import { AllPeople } from 'lib/graph/Queries'
 import request from 'lib/graph/Utils/request'
 import Cookies from 'universal-cookie'
+import PeopleItem from 'Components/Thumbnails/Person'
 
 const Home = ({ people }) => {
   return (
@@ -24,10 +24,10 @@ const Home = ({ people }) => {
           p-4
         '
       >
-        {people.map(({ id, ...rest }) => (
+        {people.map((pi) => (
           <PeopleItem
-            key={`sw-people-item-${id}`}
-            {...rest}
+            key={`sw-people-item-${pi.id}`}
+            {...pi}
           />
         ))}
       </div>
