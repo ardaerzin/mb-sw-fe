@@ -21,7 +21,7 @@ const CharacterPage = ({ character, ...rest }) => {
         items-start justify-center
         max-w-md sm:max-w-lg md:max-w-3xl w-full
         mx-auto
-        py-12 px-2 xl:px-0
+        py-24 px-2 xl:px-0
         space-y-8
       '
     >

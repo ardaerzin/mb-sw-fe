@@ -66,7 +66,7 @@ const SearchResults = ({ text }) => {
           items-end
           max-w-screen-xl
           mx-auto
-          mr-2 md:mr-8 lg:mr-auto
+          mr-2 md:mr-8 xl:mr-auto
           w-full
         '
       >
