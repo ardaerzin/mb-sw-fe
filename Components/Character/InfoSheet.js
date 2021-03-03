@@ -1,5 +1,8 @@
 import PropTypes from 'prop-types'
 import { Fragment } from 'react'
+import dynamic from 'next/dynamic'
+
+const CharacterLikeButton = dynamic(() => import('./LikeButton'), { ssr: false })
 
 const InfoTemp = [
   {
@@ -62,16 +65,24 @@ const Val = ({ index, ...rest }) => {
 const CharacterInfoSheet = ({ character }) => {
   return (
     <div className='flex flex-col items-center md:items-start w-full'>
-      {
-        character.species && (
-          <h2 className='text-xs text-white bg-red-500 py-1 px-2 rounded-full md:self-start'>
-            {character.species?.name}
-          </h2>
-        )
-      }
-      <h1 className='text-4xl font-black text-center'>
-        {character.name}
-      </h1>
+      <div className='flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 items-center'>
+        <CharacterLikeButton
+          id={character.id}
+          size='4xl'
+        />
+        <div className='flex flex-col items-center md:items-start w-full'>
+          {
+            character.species && (
+              <h2 className='text-xs text-white bg-red-500 py-1 px-2 rounded-full md:self-start'>
+                {character.species?.name}
+              </h2>
+            )
+          }
+          <h1 className='text-4xl font-black text-center'>
+            {character.name}
+          </h1>
+        </div>
+      </div>
       {
         character.homeworld && (
           <span>
