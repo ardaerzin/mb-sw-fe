@@ -26,7 +26,7 @@ const PeopleItem = ({ name, image, id, likeAction, dislikeAction, liked = false 
         <div
           className='absolute top-0 left-0 right-0 bottom-0'
           style={{
-            background: 'linear-gradient(0deg, #ffffff44 30%, #00000088 100%)'
+            background: 'linear-gradient(0deg, #ffffff44 30%, #00000030 100%)'
           }}
         />
       </div>
