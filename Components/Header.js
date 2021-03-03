@@ -6,10 +6,14 @@ import SearchResults from 'Components/Search'
 import { AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { useLocalStorage } from '@rehooks/local-storage';
 
 const Header = props => {
   const [search, setSearch] = useSharedState('searchState', { text: undefined, status: false })
+  const [user] = useLocalStorage('user')
   const router = useRouter()
+
+  console.log('we got user?', user)
 
   /**
    * fire with changing search query
@@ -63,29 +67,33 @@ const Header = props => {
               StarWars Dex
             </span>
           </div>
-          <div className='relative'>
-            <input
-              type='text'
-              placeholder='search by name'
-              value={search.text || ''}
-              onChange={handleSearchChange}
-              className='
-                border-b
-                text-sm
-                rounded-lg
-                bg-transparent
-                focus:outline-none focus:border-brand focus:ring-0
-              '
-            />
-            <div
-              className='absolute right-0 top-0 h-full flex items-center pr-2 cursor-pointer'
-            >
-              <AiFillCloseCircle
-                onClick={resetSearch}
-                className='text-red-500 text-lg'
-              />
-            </div>
-          </div>
+          {
+            user && (
+              <div className='relative'>
+                <input
+                  type='text'
+                  placeholder='search by name'
+                  value={search.text || ''}
+                  onChange={handleSearchChange}
+                  className='
+                    border-b
+                    text-sm
+                    rounded-lg
+                    bg-transparent
+                    focus:outline-none focus:border-brand focus:ring-0
+                  '
+                />
+                <div
+                  className='absolute right-0 top-0 h-full flex items-center pr-2 cursor-pointer'
+                >
+                  <AiFillCloseCircle
+                    onClick={resetSearch}
+                    className='text-red-500 text-lg'
+                  />
+                </div>
+              </div>
+            )
+          }
         </div>
       </header>
       <AnimatePresence>

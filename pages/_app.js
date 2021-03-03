@@ -1,8 +1,10 @@
-import Header from 'Components/Header'
 import { MotionConfig } from 'framer-motion'
-import { DefaultSeo } from 'next-seo'
 import { useEffect, useState } from 'react'
+import { DefaultSeo } from 'next-seo'
+import dynamic from 'next/dynamic'
 import 'Styles/globals.css'
+
+const Header = dynamic(() => import('Components/Header'), { ssr: false })
 
 function MyApp({ Component, pageProps }) {
   const [features, setFeatures] = useState([])
@@ -11,6 +13,7 @@ function MyApp({ Component, pageProps }) {
       setFeatures(res.default)
     })
   }, [])
+
   return (
     <MotionConfig features={features}>
       <DefaultSeo
