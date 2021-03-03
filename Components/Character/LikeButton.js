@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types'
-import { AnimatePresence, m as motion } from 'framer-motion'
+import { useLocalStorage } from '@rehooks/local-storage'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
+import { m as motion } from 'framer-motion'
 import { useCallback } from 'react'
-import { useLocalStorage } from '@rehooks/local-storage';
+import PropTypes from 'prop-types'
 
 const CharacterLikeButton = ({ id, size = 'xl', ...rest }) => {
   const [likes = []] = useLocalStorage('userLikes')

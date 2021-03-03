@@ -6,6 +6,7 @@ import { NextSeo } from 'next-seo'
 import { AnimateSharedLayout } from 'framer-motion'
 import useSearch from 'lib/hooks/useSearch'
 import dynamic from 'next/dynamic'
+import { CharacterSectionHeader } from 'Components/Character/Section'
 
 const UserFavorites = dynamic(() => import('Components/Home/UserFavorites'), { ssr: false })
 
@@ -36,9 +37,11 @@ const Home = (props) => {
       {
         people.length > 0 ? (
           <>
-            <span className='text-3xl self-start mx-auto md:mx-0'>
-              {people.length} characters found
-            </span>
+            <div className='border-b-2 border-yellow-600'>
+              <CharacterSectionHeader>
+                found {people.length} characters
+              </CharacterSectionHeader>
+            </div>
             <AnimateSharedLayout>
               <div
                 className='
