@@ -10,9 +10,10 @@ import CharacterItemListSection from 'Components/Character/ListSection'
 import FilmItem from 'Components/Thumbnails/Film'
 import VehicleItem from 'Components/Thumbnails/Vehicle'
 import ShipItem from 'Components/Thumbnails/Ships'
+import { NextSeo } from 'next-seo'
 
 const CharacterPage = ({ character, ...rest }) => {
-  const { image, name, species, vehicles, starships, films, homeworld } = character
+  const { image, name } = character
   return (
     <div
       className='
@@ -24,6 +25,24 @@ const CharacterPage = ({ character, ...rest }) => {
         space-y-8
       '
     >
+      <NextSeo
+        title={name}
+        description={`detailed bio & movie information of ${name}`}
+        openGraph={{
+          url: `https://www.url.ie/character/${character.id}`,
+          title: name,
+          description: `detailed bio & movie information of ${name}`,
+          site_name: `StarWars Dex | ${name}`,
+          images: [
+            {
+              url: image,
+              width: 200,
+              height: 200,
+              alt: `${name} Alt`,
+            }
+          ]
+        }}
+      />
       <CharacterSection
         className='
           items-center justify-center

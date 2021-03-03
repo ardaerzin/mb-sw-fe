@@ -3,6 +3,7 @@ import { AllPeople } from 'lib/graph/Queries'
 import request from 'lib/graph/Utils/request'
 import Cookies from 'universal-cookie'
 import PeopleItem from 'Components/Thumbnails/Person'
+import { NextSeo } from 'next-seo'
 
 const Home = ({ people }) => {
   return (
@@ -16,6 +17,16 @@ const Home = ({ people }) => {
         space-y-8
       '
     >
+      <NextSeo
+        title="All Characters"
+        description="List of all characters in Star Wars movies"
+        openGraph={{
+          url: 'https://www.url.ie/a',
+          title: 'All Characters',
+          description: 'List of all characters in Star Wars movies',
+          site_name: 'StarWars Dex',
+        }}
+      />
       <div
         className='
           w-full
@@ -36,7 +47,6 @@ const Home = ({ people }) => {
 }
 
 export async function getServerSideProps({ query, req, res, ...rest }) {
-  // console.log('get serverside props', req.headers.cookie)
   var header = req && req.headers && req.headers.cookie
   var uc = new Cookies(header)
   const { userToken } = uc.getAll()

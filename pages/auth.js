@@ -17,6 +17,16 @@ const LoginPage = props => {
         md:space-x-12
       '
     >
+      <NextSeo
+        title='login'
+        description='create an account or login to access StarWars Dex'
+        openGraph={{
+          url: `https://www.url.ie/auth`,
+          title: 'login',
+          description: 'create an account or login to access StarWars Dex',
+          site_name: `StarWars Dex`
+        }}
+      />
       <div>
         <h1 className='text-4xl font-bold'>
           {
