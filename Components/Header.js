@@ -7,13 +7,26 @@ import { AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { useLocalStorage } from '@rehooks/local-storage';
+import { useEffect } from 'react'
 
 const Header = props => {
   const [search, setSearch] = useSharedState('searchState', { text: undefined, status: false })
   const [user] = useLocalStorage('user')
   const router = useRouter()
 
-  console.log('we got user?', user)
+  /**
+   * reset search state after route change
+   */
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      setSearch({ text: undefined, status: false })
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [])
+
 
   /**
    * fire with changing search query
