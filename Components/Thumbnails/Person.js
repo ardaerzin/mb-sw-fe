@@ -10,26 +10,9 @@ const PeopleItem = ({ name, image, id, likeAction, dislikeAction, liked = false 
   return (
     <ThumbnailBase
       type='character'
+      image={image}
       id={id}
     >
-      <div
-        className='relative w-full self-start'
-      >
-        <div
-          className='relative aspect-w-1 aspect-h-1'
-        >
-          <Image
-            src={image}
-            layout='fill'
-          />
-        </div>
-        <div
-          className='absolute top-0 left-0 right-0 bottom-0'
-          style={{
-            background: 'linear-gradient(0deg, #ffffff44 30%, #00000030 100%)'
-          }}
-        />
-      </div>
       <AnimatePresence
         exitBeforeEnter={true}
       >
