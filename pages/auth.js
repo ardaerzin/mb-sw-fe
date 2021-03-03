@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import Cookies from 'universal-cookie'
 import AuthFormBase from 'Components/Auth/Form'
+import { NextSeo } from 'next-seo'
 
 const LoginPage = props => {
   const [authState, setAuthState] = useState('login')
@@ -27,12 +28,12 @@ const LoginPage = props => {
           site_name: `StarWars Dex`
         }}
       />
-      <div>
+      <div className='max-w-lg'>
         <h1 className='text-4xl font-bold'>
           {
             authState === 'login' ?
-              'login to access star wars character wiki' :
-              'signup for star wars character wiki'
+              'Continue Your Discovery' :
+              'Signup to Discover Star Wars Characters'
           }
         </h1>
         <p className='text-xl max-w-2xl mt-2'>

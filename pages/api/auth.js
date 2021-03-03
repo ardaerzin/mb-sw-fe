@@ -17,7 +17,7 @@ const login = async (req, res) => {
     if (user && token) {
       res.setHeader('Set-Cookie', `userToken=${token}; Path=/`)
       res.setHeader('Authorization', token)
-      res.status(200).send(user)
+      res.json({ user })
     } else {
       res.status(400).end('not authorized')
     }

@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@rehooks/local-storage": "^2.4.0",
     "framer-motion": "^3.9.1",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
