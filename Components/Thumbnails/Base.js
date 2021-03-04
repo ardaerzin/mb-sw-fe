@@ -19,7 +19,9 @@ export const ThumbnailTitle = (props) => (
 const ThumbnailBase = ({ type, id, image, children }) => {
   return (
     <Link
-      href={`/${type}/${id}`}
+      href={`?type=${type}&id=${id}`}
+      as={`/character/${id}`}
+      scroll={false}
     >
       <motion.a
         layout
