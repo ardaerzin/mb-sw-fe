@@ -1,13 +1,12 @@
-import { FaEmpire, FaRebel } from 'react-icons/fa'
-import { CgFormatSlash } from 'react-icons/cg'
+import { useLocalStorage } from '@rehooks/local-storage'
 import useSharedState from 'lib/hooks/useSharedState'
-import { useRouter } from 'next/router'
-import SearchResults from 'Components/Search'
-import { AnimatePresence } from 'framer-motion'
-import Link from 'next/link'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { useLocalStorage } from '@rehooks/local-storage';
+import { AnimatePresence } from 'framer-motion'
+import SearchResults from 'Components/Search'
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import AppIcon from './AppIcon'
+import Link from 'next/link'
 
 const Header = props => {
   const [search, setSearch] = useSharedState('searchState', { text: undefined, status: false })
@@ -64,16 +63,8 @@ const Header = props => {
             <Link
               href='/'
             >
-              <a className='flex items-center justify-center'>
-                <FaRebel
-                  className='text-2xl md:text-lg text-yellow-600'
-                />
-                <CgFormatSlash
-                  className='text-2xl md:text-lg text-gray-500'
-                />
-                <FaEmpire
-                  className='text-2xl md:text-lg text-gray-700'
-                />
+              <a>
+                <AppIcon size={0} />
               </a>
             </Link>
             <span className='hidden md:block font-semibold text-lg text-yellow-600 pl-1'>

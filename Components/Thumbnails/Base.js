@@ -1,9 +1,8 @@
 import { m as motion } from 'framer-motion'
+import AppIcon from 'Components/AppIcon'
 import PropTypes from 'prop-types'
-import Link from 'next/link'
 import Image from 'next/image'
-import { FaEmpire, FaRebel } from 'react-icons/fa'
-import { CgFormatSlash } from 'react-icons/cg'
+import Link from 'next/link'
 
 export const ThumbnailTextHolder = (props) => (
   <div className='px-2 md:px-4 my-2 flex flex-col' {...props} />
@@ -64,17 +63,7 @@ const ThumbnailBase = ({ type, id, image, children }) => {
                     />
                   </>
                 ) : (
-                  <div className='flex items-center justify-center'>
-                    <FaRebel
-                      className='text-2xl md:text-4xl text-yellow-600'
-                    />
-                    <CgFormatSlash
-                      className='text-2xl md:text-4xl text-gray-500'
-                    />
-                    <FaEmpire
-                      className='text-2xl md:text-4xl text-gray-700'
-                    />
-                  </div>
+                  <AppIcon size={0} />
                 )
               }
             </div>
