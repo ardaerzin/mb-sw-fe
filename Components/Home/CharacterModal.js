@@ -1,15 +1,18 @@
 import CharacterPageContent from 'Components/Character/Page'
-import { m as motion } from 'framer-motion'
 import useGraphSWR from 'lib/graph/Utils/useGraphSWR'
+import { AiFillCloseCircle } from 'react-icons/ai'
+import { m as motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
-import { AiFillCloseCircle } from 'react-icons/ai'
 
-const CharacterModal = props => {
+const CharacterModal = ({ initialData }) => {
   const router = useRouter()
   const { data: person, loading } = useGraphSWR({
     dataKey: 'person',
     id: router?.query?.id || 'abort'
+  }, {
+    initialData,
+    revalidateOnMount: true
   })
   return (
     <motion.div

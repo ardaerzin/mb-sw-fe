@@ -8,13 +8,15 @@ import useSearch from 'lib/hooks/useSearch'
 import dynamic from 'next/dynamic'
 import { CharacterSectionHeader } from 'Components/Character/Section'
 import { useRouter } from 'next/router'
-import CharacterModal from 'Components/Home/CharacterModal'
 
+const CharacterModal = dynamic(() => import('Components/Home/CharacterModal'), { ssr: false })
 const UserFavorites = dynamic(() => import('Components/Home/UserFavorites'), { ssr: false })
 
 const Home = (props) => {
   const { people, loading } = useSearch(props.people)
   const { query } = useRouter()
+
+  const initialData = query?.id ? people.filter((di) => di.id === query?.id)[0] : undefined
   return (
     <div
       className='
@@ -39,7 +41,7 @@ const Home = (props) => {
       <AnimatePresence>
         {
           query?.type === 'character' && (
-            <CharacterModal />
+            <CharacterModal initialData={initialData} />
           )
         }
       </AnimatePresence>
