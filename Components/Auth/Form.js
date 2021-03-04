@@ -2,6 +2,9 @@ import { useForm } from 'lib/hooks/useForm'
 import Button from 'Components/Button'
 import PropTypes from 'prop-types'
 import Router from 'next/router'
+import { useState } from 'react'
+import { m as motion } from 'framer-motion'
+import Spinner from 'Components/Spinner'
 
 const validations = {
   email: {
@@ -42,10 +45,13 @@ const Input = (props) => (
 )
 
 const AuthFormBase = ({ switchState, switchTo, state, ...rest }) => {
+  const [loading, setLoading] = useState(false)
   const { handleSubmit, handleChange, handleFocus, handleBlur, data, errors, isValid } = useForm({
     validations,
     initialValues: { email: '', password: '' },
     onSubmit: async () => {
+      // set loading
+      setLoading(true)
       /**
        * send a post request to local api route, which then will perform a graph mutation
        * type: login or signup
@@ -63,9 +69,11 @@ const AuthFormBase = ({ switchState, switchTo, state, ...rest }) => {
         writeStorage('user', user)
         // redirect logged in user to home
         Router.push('/')
+        setLoading(false)
       } else {
         // there was an error
         // notify user
+        setLoading(false)
       }
     }
   })
@@ -106,10 +114,34 @@ const AuthFormBase = ({ switchState, switchTo, state, ...rest }) => {
         >
           switch to {switchTo}
         </span>
-        <Button type='submit' disabled={!isValid}>
-          <span>
-            {state}
-          </span>
+        <Button type='submit' loading={loading} disabled={!isValid}>
+          <motion.div
+            className='relative'
+            initial='start'
+            animate={loading ? 'loading' : 'start'}
+          >
+            <motion.span
+              variants={{
+                start: { opacity: 1 },
+                loading: { opacity: 0 }
+              }}
+            >
+              {state}
+            </motion.span>
+            {
+              loading && (
+                <motion.div
+                  className='text-2xl absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center'
+                  variants={{
+                    start: { opacity: 0 },
+                    loading: { opacity: 1 }
+                  }}
+                >
+                  <Spinner />
+                </motion.div>
+              )
+            }
+          </motion.div>
         </Button>
       </div>
     </form>

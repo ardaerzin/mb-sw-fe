@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Cookies from 'universal-cookie'
-import AuthFormBase from 'Components/Auth/Form'
 import { NextSeo } from 'next-seo'
+import dynamic from 'next/dynamic'
+import AppIcon from 'Components/AppIcon'
+
+const AuthFormBase = dynamic(() => import('Components/Auth/Form'), { ssr: false })
 
 const LoginPage = props => {
   const [authState, setAuthState] = useState('login')
@@ -28,15 +31,16 @@ const LoginPage = props => {
           site_name: `StarWars Dex`
         }}
       />
-      <div className='max-w-lg'>
-        <h1 className='text-4xl font-bold'>
+      <div className='max-w-lg flex flex-col md:items-start space-y-2'>
+        <AppIcon size={2} />
+        <h1 className='text-4xl font-bold text-center md:text-left'>
           {
             authState === 'login' ?
               'Continue Your Discovery' :
               'Signup to Discover Star Wars Characters'
           }
         </h1>
-        <p className='text-xl max-w-2xl mt-2'>
+        <p className='text-xl max-w-2xl mt-2 text-center md:text-left'>
           Voluptate nisi quis sunt dolore non excepteur ut velit amet qui pariatur. Est do elit qui quis dolore quis. Amet tempor officia dolore quis dolore qui commodo labore.
         </p>
       </div>
