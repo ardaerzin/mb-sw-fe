@@ -3,11 +3,18 @@ import classnames from 'classnames'
 import { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 
-const Button = forwardRef(({ disabled = false, color = '#00f', className, ...rest }, ref) => {
+const Button = forwardRef(({ onClick, loading = false, disabled = false, color = '#00f', className, ...rest }, ref) => {
   return (
     <motion.button
       ref={ref}
       href='/'
+      onClick={(e) => {
+        if (loading) {
+          e.preventDefault?.()
+          return
+        }
+        onClick?.(e)
+      }}
       className={classnames(`
         shadow
         flex
@@ -15,20 +22,21 @@ const Button = forwardRef(({ disabled = false, color = '#00f', className, ...res
         px-8 md:px-8
         items-center justify-center
         rounded-md
+        relative
         border border-transparent
         font-display font-medium
         text-base text-white md:text-lg
       `, className)}
       whileHover='hover'
-      initial='initial'
-      animate={disabled ? 'disabled' : 'initial'}
+      disabled={disabled}
+      animate={disabled ? 'disabled' : 'normal'}
       variants={{
         disabled: {
-          opacity: 0.5
+          opacity: 0.5,
+          boxShadow: `0 0 0 0px ${color}`
         },
-        initial: {
+        normal: {
           opacity: 1,
-          backgroundColor: color,
           boxShadow: `0 0 0 0px ${color}`
         },
         hover: {
@@ -36,11 +44,9 @@ const Button = forwardRef(({ disabled = false, color = '#00f', className, ...res
           boxShadow: `0 0 0 2px ${color}`
         }
       }}
-      disabled={disabled}
-      transition={{
-        type: 'spring',
-        damping: 40,
-        stiffness: 400
+      style={{
+        backgroundColor: color,
+        boxShadow: `0 0 0 0px ${color}`
       }}
       {...rest}
     />
