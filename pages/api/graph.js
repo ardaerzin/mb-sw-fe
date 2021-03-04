@@ -1,16 +1,25 @@
 import { Login, Signup } from 'lib/graph/Mutations/User'
-import { AllPeople } from 'lib/graph/Queries'
+import { AllPeople, Character } from 'lib/graph/Queries'
 import request from 'lib/graph/Utils/request'
 import Cookies from 'universal-cookie'
 
 const graph = async (req, res) => {
-  const { type } = req.query
+  const { type, id } = req.query
+
+  if (id === 'abort') {
+    res.status(404).end()
+    return
+  }
+
   try {
 
     let query
     switch (type) {
       case 'allPeople':
         query = AllPeople
+        break
+      case 'person':
+        query = Character
         break
       default:
         break
@@ -24,7 +33,10 @@ const graph = async (req, res) => {
 
     const data = await request({
       query,
-      token: userToken
+      token: userToken,
+      vars: {
+        id: `${id}`
+      }
     })
 
     res.json(data)
