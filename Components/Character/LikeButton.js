@@ -1,6 +1,6 @@
-import { AnimatePresence, m as motion } from 'framer-motion'
 import { useLocalStorage } from '@rehooks/local-storage'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
+import { m as motion } from 'framer-motion'
 import { useCallback } from 'react'
 import PropTypes from 'prop-types'
 
@@ -34,58 +34,53 @@ const CharacterLikeButton = ({ id, size = 'xl', ...rest }) => {
   const liked = likes.indexOf(id) >= 0
 
   return (
-    <AnimatePresence
-      exitBeforeEnter={true}
+    <div
+      {...rest}
     >
-
-      <div
-        {...rest}
-      >
-        {
-          (liked) && (
-            <motion.div
-              onClick={(e) => {
-                e.stopPropagation()
-                dislike(id)
-              }}
-              exit='exit'
-              animate='enter'
-              initial='exit'
-              variants={{
-                exit: { scale: 0 },
-                enter: { scale: 1 }
-              }}
-            >
-              <FaHeart
-                className={`text-${size} text-red-500`}
-              />
-            </motion.div>
-          )
-        }
-        
-        {
-          !(liked) && (
-            <motion.div
-              onClick={(e) => {
-                e.stopPropagation()
-                like(id)
-              }}
-              exit='exit'
-              initial='exit'
-              animate='enter'
-              variants={{
-                exit: { scale: 0 },
-                enter: { scale: 1 }
-              }}
-            >
-              <FaRegHeart
-                className={`text-${size} text-red-500`}
-              />
-            </motion.div>
-          )
-        }
-      </div>
-    </AnimatePresence>
+      {
+        (liked) && (
+          <motion.div
+            onClick={(e) => {
+              e.stopPropagation()
+              dislike(id)
+            }}
+            exit='exit'
+            animate='enter'
+            initial='exit'
+            variants={{
+              exit: { scale: 0 },
+              enter: { scale: 1 }
+            }}
+          >
+            <FaHeart
+              className={`text-${size} text-red-500`}
+            />
+          </motion.div>
+        )
+      }
+      
+      {
+        !(liked) && (
+          <motion.div
+            onClick={(e) => {
+              e.stopPropagation()
+              like(id)
+            }}
+            exit='exit'
+            initial='exit'
+            animate='enter'
+            variants={{
+              exit: { scale: 0 },
+              enter: { scale: 1 }
+            }}
+          >
+            <FaRegHeart
+              className={`text-${size} text-red-500`}
+            />
+          </motion.div>
+        )
+      }
+    </div>
   )
 }
 
