@@ -1,15 +1,28 @@
+import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock'
 import CharacterPageContent from 'Components/Character/Page'
 import useGraphSWR from 'lib/graph/Utils/useGraphSWR'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { m as motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
+import { useEffect, useRef } from 'react'
 
 const CharacterModal = ({ initialData }) => {
   const router = useRouter()
+  const ref = useRef()
+
+  useEffect(() => {
+    const current = ref.current
+    disableBodyScroll(current)
+    
+    return () => {
+      enableBodyScroll(current)
+    }
+  }, [])
+  
   const { data: person, loading } = useGraphSWR({
     dataKey: 'person',
-    id: router?.query?.id || 'abort'
+    id: initialData.id || 'abort'
   }, {
     initialData,
     revalidateOnMount: true
@@ -31,6 +44,7 @@ const CharacterModal = ({ initialData }) => {
       onClick={() => router.push('/', undefined, { shallow: true })}
     >
       <motion.div
+        ref={ref}
         className='
           bg-white relative w-11/12 h-5/6 rounded-lg shadow-lg
           max-w-2xl
