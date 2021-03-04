@@ -29,7 +29,7 @@ const Home = (props) => {
       }
 
       // url: /character/id
-      let parts = a.split('/')
+      let parts = url.split('/')
       if (parts[1] === 'character' && parts[2]) {
         // find the selected person and set state so we pass it to the modal
         setSelected(people.filter((di) => di.id === parts[2])[0])
