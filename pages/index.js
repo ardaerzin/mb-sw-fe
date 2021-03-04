@@ -3,15 +3,18 @@ import { AllPeople } from 'lib/graph/Queries'
 import request from 'lib/graph/Utils/request'
 import Cookies from 'universal-cookie'
 import { NextSeo } from 'next-seo'
-import { AnimateSharedLayout } from 'framer-motion'
+import { AnimatePresence, AnimateSharedLayout } from 'framer-motion'
 import useSearch from 'lib/hooks/useSearch'
 import dynamic from 'next/dynamic'
 import { CharacterSectionHeader } from 'Components/Character/Section'
+import { useRouter } from 'next/router'
+import CharacterModal from 'Components/Home/CharacterModal'
 
 const UserFavorites = dynamic(() => import('Components/Home/UserFavorites'), { ssr: false })
 
 const Home = (props) => {
   const { people, loading } = useSearch(props.people)
+  const { query } = useRouter()
   return (
     <div
       className='
@@ -33,6 +36,13 @@ const Home = (props) => {
           site_name: 'StarWars Dex',
         }}
       />
+      <AnimatePresence>
+        {
+          query?.type === 'character' && (
+            <CharacterModal />
+          )
+        }
+      </AnimatePresence>
       <UserFavorites people={people} />
       {
         people.length > 0 ? (

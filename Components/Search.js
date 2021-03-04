@@ -1,9 +1,4 @@
-import useSharedState from 'lib/hooks/useSharedState'
 import { AnimateSharedLayout, m as motion } from 'framer-motion'
-import PropTypes from 'prop-types'
-import useGraphSWR from 'lib/graph/Utils/useGraphSWR'
-import useSWR from 'swr'
-import { AllPeople } from 'lib/graph/Queries'
 import useSearch from 'lib/hooks/useSearch'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -34,7 +29,6 @@ const SearchResultItem = (props) => {
 
 const SearchResults = ({ text }) => {
   const { people = [], loading } = useSearch()
-  console.log('what are people?', people)
   return (
     <motion.div
       className='
