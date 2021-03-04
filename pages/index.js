@@ -8,15 +8,43 @@ import useSearch from 'lib/hooks/useSearch'
 import dynamic from 'next/dynamic'
 import { CharacterSectionHeader } from 'Components/Character/Section'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 const CharacterModal = dynamic(() => import('Components/Home/CharacterModal'), { ssr: false })
 const UserFavorites = dynamic(() => import('Components/Home/UserFavorites'), { ssr: false })
 
 const Home = (props) => {
   const { people, loading } = useSearch(props.people)
-  const { query } = useRouter()
+  const [selected, setSelected] = useState()
+  const router = useRouter()
 
-  const initialData = query?.id ? people.filter((di) => di.id === query?.id)[0] : undefined
+  useEffect(() => {
+    // use route change start event to speed up modal opening
+    const handleRouteChangeStart = (url) => {
+      
+      // selected person is undefined if we are going back to the list
+      if (url === '/') {
+        setSelected(undefined)
+        return
+      }
+
+      // url: /character/id
+      let parts = a.split('/')
+      if (parts[1] === 'character' && parts[2]) {
+        // find the selected person and set state so we pass it to the modal
+        setSelected(people.filter((di) => di.id === parts[2])[0])
+      }
+    }
+
+    //subscribe to routechange start event
+    router.events.on('routeChangeStart', handleRouteChangeStart)
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method:
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChangeStart)
+    }
+  }, [])
+
   return (
     <div
       className='
@@ -40,8 +68,8 @@ const Home = (props) => {
       />
       <AnimatePresence>
         {
-          query?.type === 'character' && (
-            <CharacterModal initialData={initialData} />
+          selected && (
+            <CharacterModal initialData={selected} />
           )
         }
       </AnimatePresence>
